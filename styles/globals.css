@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+   
+}
+
+html, body, #__next {
+  height: 100%;
+  @apply text-mcqueen;
+  font-family: var(--montreal);
+}
+
+#__next {
+  isolation: isolate;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+input, button, textarea, select {
+  font: inherit;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+li {
+  list-style: none;
+}
+
+@keyframes slideDown {
+  from { height: 0 }
+  to { height: var(--radix-collapsible-content-height) }
+}
+@keyframes close {
+  from { height: var(--radix-collapsible-content-height) }
+  to { height: 0 }
+}
+
+@layer utilities {
+  .grid-cols-yeah {
+    grid-template-columns: 1.5fr 0.5fr 1fr 1fr 1fr 0.1fr;
+    @apply max-w-screen-2xl mx-auto;
+  }
+
+  .content, .overlay {
+    grid-area: 1/1;
+  }
+  
+  .open {
+    animation: slideDown 0.35s cubic-bezier(0.5, 0, 0.88, 0.77);
+  }
+  .close {
+    animation: close 0.25s cubic-bezier(0.12, 0.23, 0.5, 1);
+  }
+  
+  .h-fill-available {
+    height: -webkit-fill-available;
+    height: -moz-available;
+    height: stretch;
+  }
+}
+
+.park {
+  counter-reset: park-list;
+}
+
+.park h2::before {
+  counter-increment: park-list; 
+  content: counter(park-list, decimal-leading-zero);
+  margin-right: 2rem;
+  font-variant: tabular-nums;
+}
+
+.col-divider::after {
+  @apply w-px h-full col-start-5 bg-mcqueen content-[''];
+}
