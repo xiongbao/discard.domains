@@ -1,3 +1,4 @@
+import getConfig from 'next/config';
 import * as Dialog from "@radix-ui/react-dialog";
 import Link from "@/components/Link";
 import Button from "@/components/Button";
@@ -28,6 +29,7 @@ export default function Header() {
   const route = useRouter().route;
   const [submitted, setSubmitted] = React.useState(false);
   const [submitting, setSubmitting] = React.useState(false);
+  const { publicRuntimeConfig } = getConfig();
 
   const handleParam = () => (e) => {
     e.persist();
@@ -53,7 +55,7 @@ export default function Header() {
     Object.entries(inputs).forEach(([key, value]) => {
       formData.append(key, value);
     });
-    fetch(`https://getform.io/f/${process.env.DISCARD_FORM_ID}`, {
+    fetch(`https://getform.io/f/${publicRuntimeConfig.discardFormId}`, {
       method: "POST",
       body: formData,
       headers: {
