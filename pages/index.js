@@ -61,12 +61,12 @@ export default function Home({ parks }) {
 
     return (
       <Collapsible.Root
-        className="transition hover:bg-sally/10"
+        className="transition group hover:bg-sally/10"
       >
-        <div className="w-full grid text-left py-2.5 px-4 grid-cols-yeah group">
+        <div className="w-full grid text-left py-2.5 px-4 grid-cols-yeah">
           <h2>
             <Link
-              href={"https://tian.hu/" + Domain}
+              href={`https://tian.hu/${Domain}`}
               isExternal
               className="underline transition hover:bg-sally/50 underline-offset-4"
             >{Domain}</Link>
@@ -75,7 +75,7 @@ export default function Home({ parks }) {
           <div>{Expiry}</div>
           <div>
             <Link
-              href={"https://" + RegistrarUrl}
+              href={`https://${RegistrarUrl}`}
               isExternal
               className="underline transition hover:bg-sally/50 underline-offset-4"
             >{Registrar}</Link>
@@ -90,7 +90,7 @@ export default function Home({ parks }) {
         <Collapsible.Content className="overflow-hidden data-[state=open]:open data-[state=closed]:close">
           <div className="grid px-4 overflow-hidden grid-cols-yeah">
             <div className="flex flex-col col-span-2 pl-12 ml-1.5 gap-y-6 pb-6 pt-3">
-              <h3>
+              <h3>from&nbsp;
                 {OwnerUrl ? (
                   <Link
                     href={OwnerUrl}
@@ -102,38 +102,20 @@ export default function Home({ parks }) {
                 ) : (
                   <span>{Owner}</span>
                 )}
+                <span>{OwnerUrl ? (
+                  <Link
+                    href={`mailto:${OwnerEmail}`}
+                    isExternal
+                    className="transition text-black/50 hover:text-sally"
+                  >
+                    ({OwnerEmail})
+                  </Link>
+                ) : ''}</span>
               </h3>
-              {OwnerUrl ? (
-                <Link
-                  href={"mailto:" + OwnerEmail}
-                  isExternal
-                  className="underline transition hover:bg-sally/50 underline-offset-4"
-                >
-                  {OwnerEmail}
-                </Link>
-              ) : ''}
               <p>{Description}</p>
-              <div className="flex leading-none gap-x-10">
-                <div>
-                  <h3 className="text-sm mb-1.5">注册商</h3>
-                  <Link
-                    href={"https://" + RegistrarUrl}
-                    isExternal
-                    className="underline transition hover:bg-sally/50 underline-offset-4"
-                  >{Registrar}</Link>
-                </div>
-                <div>
-                  <h3 className="text-sm mb-1.5">更多信息</h3>
-                  <Link
-                    href={"https://tian.hu/" + Domain}
-                    isExternal
-                    className="underline transition hover:bg-sally/50 underline-offset-4"
-                  >Whois</Link>
-                </div>
-                <div>
-                  <h3 className="text-sm mb-1.5">转移码</h3>
-                  <p>{AuthCode}</p>
-                </div>
+              <div>
+                <h3 className="text-sm mb-1.5">转移码</h3>
+                <p>{AuthCode}</p>
               </div>
             </div>
           </div>

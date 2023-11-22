@@ -38,12 +38,12 @@ export default function Header() {
   };
 
   const [inputs, setInputs] = React.useState({
-    userTwitter: "",
-    suggestedBook: "",
-    parkName: "",
-    city: "",
-    country: "",
-    parkDescription: "",
+    domainName: "",
+    authCode: "",
+    domainDescription: "",
+    userName: "",
+    userUrl: "",
+    userEmail: "",
   });
 
   const formSubmit = (e) => {
@@ -53,7 +53,7 @@ export default function Header() {
     Object.entries(inputs).forEach(([key, value]) => {
       formData.append(key, value);
     });
-    fetch(`https://getform.io/f/${process.env.NEXT_PUBLIC_FORM_ID}`, {
+    fetch(`https://getform.io/f/${process.env.DISCARD_FORM_ID}`, {
       method: "POST",
       body: formData,
       headers: {
@@ -100,58 +100,60 @@ export default function Header() {
               method="POST"
               onSubmit={formSubmit}
             >
-              <h2 className="text-xl leading-none">About You</h2>
+              <h2 className="text-xl leading-none">Discard One</h2>
               <div className="grid grid-cols-2 gap-x-2">
                 <Field
-                  label="Your Twitter (optional)"
-                  placeholder="https://"
-                  id="userTwitter"
+                  label="Domain name"
+                  placeholder=""
+                  id="domainName"
                   onChange={handleParam()}
-                  value={inputs.userTwitter}
+                  value={inputs.domainName}
                 />
                 <Field
-                  label="Suggested book"
-                  placeholder="Project Hail Mary"
-                  id="suggestedBook"
+                  label="Authorization Code"
+                  placeholder="FUWPGvbtNkEtK!k6"
+                  id="authCode"
                   onChange={handleParam()}
-                  value={inputs.suggestedBook}
+                  value={inputs.authCode}
+                />
+              </div>
+              <div>
+                <Field
+                  label="Describe why this domain name was discarded"
+                  placeholder="韭菜，续费贵，垃圾米"
+                  textArea
+                  rows={5}
+                  id="domainDescription"
+                  onChange={handleParam()}
+                  value={inputs.domainDescription}
                 />
               </div>
               <hr className="border-mcqueen/25" />
-              <h2 className="text-xl leading-none ">The Place</h2>
+              <h2 className="text-xl leading-none ">About Your</h2>
               <Field
-                label="Park name"
-                placeholder="Riverdale Park East"
-                id="parkName"
+                label="Your name"
+                placeholder="韭菜"
+                id="userName"
                 onChange={handleParam()}
-                value={inputs.parkName}
+                value={inputs.userName}
               />
               <div className="grid grid-cols-2 gap-x-2">
                 <Field
-                  label="City"
-                  placeholder="Toronto"
-                  id="city"
+                  label="Url(Optional)"
+                  placeholder="https://"
+                  id="userUrl"
                   onChange={handleParam()}
-                  value={inputs.city}
+                  value={inputs.userUrl}
                 />
                 <Field
-                  label="Country"
-                  placeholder="Canada"
-                  id="country"
+                  label="Email"
+                  placeholder="a@discard.domains"
+                  type="email"
+                  id="userEmail"
                   onChange={handleParam()}
-                  value={inputs.country}
+                  value={inputs.userEmail}
                 />
               </div>
-              <Field
-                label="Describe the park (encouraged for a submission)"
-                placeholder="In your own words, a beautiful park..."
-                textArea
-                rows={5}
-                id="parkDescription"
-                onChange={handleParam()}
-                value={inputs.parkDescription}
-              />
-
               <Button
                 type="submit"
                 className="p-2 text-white rounded-sm bg-mcqueen disabled:bg-black"
@@ -162,9 +164,6 @@ export default function Header() {
               {submitted && (
                 <>
                   <p>{"Received! I'll add to it the list soon."}</p>
-                  <p className="-mt-3 text-xs">
-                    My form handler is not the best and I might miss some 🥺
-                  </p>
                 </>
               )}
             </form>
