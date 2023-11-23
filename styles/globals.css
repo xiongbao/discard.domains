@@ -50,17 +50,17 @@ li {
 
 @keyframes slideDown {
   from { height: 0 }
-  to { height: var(--radix-collapsible-content-height) }
+  to { height: 200px }
 }
 @keyframes close {
-  from { height: var(--radix-collapsible-content-height) }
+  from { height: 200px }
   to { height: 0 }
 }
 
 @layer utilities {
   .grid-cols-yeah {
-    grid-template-columns: 1.5fr 0.5fr 1fr 1fr 1fr 0.1fr;
-    @apply max-w-screen-2xl mx-auto;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr .5fr 0.1fr;
+    @apply mx-auto max-w-screen-2xl;
   }
 
   .content, .overlay {

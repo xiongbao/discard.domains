@@ -2,7 +2,7 @@ import getConfig from 'next/config';
 import Link from "@/components/Link";
 import Arrow from "@/components/Arrow";
 import { google } from "googleapis";
-import React, { useState } from "react";
+import React, { useRef, useEffect, useState } from "react";
 
 export async function getStaticProps() {
   const { serverRuntimeConfig } = getConfig();
@@ -24,9 +24,6 @@ export async function getStaticProps() {
   const rows = [];
   const rawRows = res.data.values || [];
   const headers = rawRows.shift();
-
-
-  console.log(rawRows)
 
   rawRows.forEach((row) => {
     const rowData = {};
@@ -70,7 +67,7 @@ export default function Home({ parks }) {
 
     return (
       <div
-        className="transition group hover:bg-sally/10"
+        className="transition group hover:bg-slate-100"
       >
         <div className="w-full grid text-left py-2.5 px-4 grid-cols-yeah" onClick={handleToggle}>
           <h2>
@@ -94,16 +91,16 @@ export default function Home({ parks }) {
             <Arrow />
           </div>
         </div>
-        <div className={`overflow-hidden transition-all duration-500 ${isExpanded ? 'max-h-full open' : 'max-h-0 close'}`}>
+        <div className={`overflow-hidden transition-all ${isExpanded ? 'open' : 'close'}`}>
           {isExpanded && (
-            <div className="grid px-4 overflow-hidden">
+            <div className="grid px-4 mx-auto overflow-hidden">
               <div className="flex flex-col col-span-2 pl-12 ml-1.5 gap-y-6 pb-6 pt-3">
                 <h3>from&nbsp;
                   {OwnerUrl ? (
                     <Link
                       href={OwnerUrl}
                       isExternal
-                      className="underline transition hover:bg-sally/50 underline-offset-4"
+                      className="underline transition hover:bg-slate-50 underline-offset-4"
                     >
                       {Owner}
                     </Link>
@@ -137,7 +134,7 @@ export default function Home({ parks }) {
     <main className="w-full h-full">
       <div className="">
         <div className="text-xl border-b-2 border-mcqueen">
-          <ul className="grid w-full px-4 grid-cols-yeah">
+          <ul className="grid w-full px-4 grid-cols-yeah text-slate-500">
             <li className="pl-12 ml-1.5">域名</li>
             <li>注册日期</li>
             <li>过期时间</li>
